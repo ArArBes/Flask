@@ -1,0 +1,132 @@
+body {
+    background-color: #f5f4f4;
+    font-family: sans-serif;
+}
+
+header,
+footer{
+    display: flex;
+    background-color: #333333;
+    color: white;
+    height: 100%;
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 19px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-height: 60px;
+    font-weight: 600;
+}
+
+header nav {
+    display: flex;
+    gap: 46px;
+}
+
+header nav a{
+    text-decoration: none;
+    color: inherit;
+    cursor: default;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    max-height: 80px;
+    font-weight: 500;
+}
+
+main {
+    padding-top: 60px;   /* высота header */
+    padding-bottom: 80px; /* высота footer */
+    text-align: center;
+}
+
+main h2{
+    font-size: 42px;
+}
+
+main p{
+    font-weight: 500;
+    font-size: 21px;
+}
+
+main li{
+    font-weight: 500;
+    font-size: 21px;
+}
+
+main img{
+    max-width: 286px;
+    margin-top: 8px;
+}
+
+/* Стили для формы */
+.contact{
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 18px;
+    font-size: 14px;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    border-color: #333333;
+}
+
+/* Кнопка отправки */
+.contact-form button {
+    width: 100px;
+    align-self: center;
+    padding: 8px 0;
+    background-color: #333333;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #555555;
+}
+
+.error {
+    width: 100%;
+    margin: 10px 0px;
+    padding: 5px;
+    border: 1px solid #ff6868;
+    font-weight: 600;
+}
+
+
