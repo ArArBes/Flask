@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funny Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1 class="funny-title">😄 Enter Your Details! 🦄</h1>
+    <form action="/submit" method="POST" class="funny-form">
+        <label for="name">Your Super Cool Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="color">Your Favorite Color:</label>
+        <input type="color" id="color" name="color" required>
+        <div id="colorPreview" class="colorPreview"></div><br><br>
+
+        <label for="profession">Your Profession:</label>
+        <select id="profession" name="profession">
+            <option value="developer">Developer</option>
+            <option value="designer">Designer</option>
+            <option value="manager">Manager</option>
+        </select>
+
+        <p>Your Hobbies:</p>
+        <label>
+          <input type="checkbox" name="hobbies" value="books" />
+          <span class="checkbox-custom"></span>
+          Books
+        </label>
+
+        <label>
+          <input type="checkbox" name="hobbies" value="sports" />
+          <span class="checkbox-custom"></span>
+          Sports
+        </label>
+
+        <label>
+          <input type="checkbox" name="hobbies" value="games" />
+          <span class="checkbox-custom"></span>
+          Games
+        </label>
+
+        <p>Your Level:</p>
+        <label>
+          <input type="radio" name="level" value="beginner" />
+          <span class="radio-custom"></span>
+          Beginner
+        </label>
+
+        <label>
+          <input type="radio" name="level" value="advanced" />
+          <span class="radio-custom"></span>
+          Advanced
+        </label>
+
+        <div class="button">
+            <button type="submit" class="funny-button">🚀 Let's Go!</button>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button type="button" id="funButton" class="funny-button">Нажми меня</button>
+        </div>
+
+        <div id="funMessage" style="margin-top: 15px; font-weight: bold; color: #e03c31;"></div>
+    </form>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
