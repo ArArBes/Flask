@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+    <h2>Contact Us</h2>
+    {% if message_sent %}
+        <p style="color: green; font-weight: bold;">Your message has been sent successfully!</p>
+    {% endif %}
+
+    <section class="contact">
+        <form action="#" method="POST" class="contact-form">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" value="{{ name }}" required />
+            {% if errors.name %}
+                <div class="error">{{ errors.name }}</div>
+            {% endif %}
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" value="{{ email }}" required />
+            {% if errors.email %}
+                <div class="error">{{ errors.email }}</div>
+            {% endif %}
+
+            <label for="message">Your Message:</label>
+            <textarea id="message" name="message" rows="5" required>{{ message }}</textarea>
+            {% if errors.message %}
+                <div class="error">{{ errors.message }}</div>
+            {% endif %}
+
+            <button type="submit">Send</button>
+
+        </form>
+    </section>
+
+    <div class="care_department">
+        <h4>{{ contact_info.care_department.name}}</h4>
+        <p>{{ contact_info.care_department.manager }}</p>
+        <p>{{ contact_info.care_department.contacts.phone }}, {{ contact_info.care_department.contacts.email }}</p>
+        <p>{{ contact_info.care_department.address.street }},
+            {{ contact_info.care_department.address.city }},
+            {{ contact_info.care_department.address.postal_code }}
+        </p>
+    </div>
+{% endblock %}

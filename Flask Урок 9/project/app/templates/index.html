@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h2>Welcome to My Flask App!</h2>
+    <p>Explore the website to learn more about us!</p>
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Image Flask Logo" class="flask-logo">
+    <p class="time">Today: {{ current_time.strftime('%A, %B %d, %Y, %H:%M:%S') }}</p>
+{% endblock %}
