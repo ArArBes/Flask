@@ -1,0 +1,47 @@
+{% extends 'add_agent.html' %}
+
+{% block title %}
+Editing agent
+{% endblock %}
+
+{% block form_title %}
+Изменить данные агента № {{ agent_id }}
+{% endblock %}
+
+{% block random %}
+{% endblock %}
+
+{% block form_action %}
+{{ url_for('edit_agent_data', id=agent_id) }}
+{% endblock %}
+
+{% block value_code_name %}
+{{ code_name }}
+{% endblock %}
+
+{% block contact_phone %}
+{{ contact_phone }}
+{% endblock %}
+
+{% block email %}
+{{ email }}
+{% endblock %}
+
+{% block access_level %}
+<select class="form-select" id="access_level" name="access_level" required>
+    <option value="Открыто" {% if access_level==
+    "Открыто" %}selected{% endif %}>Открыто</option>
+    <option value="Конфиденциально" {% if access_level==
+    "Конфиденциально" %}selected{% endif %}>Конфиденциально</option>
+    <option value="Секретно" {% if access_level==
+    "Секретно" %}selected{% endif %}>Секретно</option>
+    <option value="Совершенно секретно" {% if access_level==
+    "Совершенно секретно" %}selected{% endif %}>Совершенно секретно</option>
+    <option value="Особой важности" {% if access_level==
+    "Особой важности" %}selected{% endif %}>Особой важности</option>
+</select>
+{% endblock %}
+
+{% block buttontext %}
+Изменить данные агента
+{% endblock %}
