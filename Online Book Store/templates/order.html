@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" action="{{ url_for('main.create_order') }}">
+    <div class="row">
+        {% for book in books %}
+        <div class="col-md-4 mb-4 d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <a href="{{ url_for('main.book', book_id=book.id) }}" class="card-body text-center">
+                    <div
+                        class="form-check mb-2 text-center border-bottom border-primary rounded p-2 bg-light shadow-sm">
+                        <input class="form-check-input select-book" type="hidden" name="selected_books"
+                            value="{{ book.id }}" id="bookCheck{{ book.id }}"
+                            style="margin-left: 5px; margin-right: 5px">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                    </div>
+                    <img src="{{ url_for('static', filename='img/bookIMG.webp') }}" alt="{{ book.title }} обложка"
+                        class="card-img-top mb-3" />
+
+                    <p class="mb-1 text-start"><strong>Автор:</strong> {{ book.author }}</p>
+                    <p class="mb-1 text-start"><strong>Год выпуска:</strong> {{ book.year }}</p>
+                    <p class="mb-1 text-start"><strong>Цена:</strong> {{ book.price }} руб.</p>
+                    <p class="mb-1 text-start"><strong>Кол-во:</strong> {{ book.count }}</p>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <h4>Оформление заказа</h4>
+
+    <div class="mb-3">
+        <label for="deliveryMethod" class="form-label"><strong>Способы доставки:</strong></label>
+        <select id="deliveryMethod" name="delivery_method" class="form-select" required onchange="toggleAddressField()">
+            <option value="pickup">Самовывоз</option>
+            <option value="delivery">До двери</option>
+        </select>
+    </div>
+
+    <div class="mb-3" id="addressField" style="display:none;">
+        <label for="addressInput" class="form-label"><strong>Адрес доставки:</strong></label>
+        <textarea id="addressInput" name="address" class="form-control" rows="3"
+            placeholder="Введите адрес доставки"></textarea>
+    </div>
+
+    <div class="my-3">
+        <div class="alert alert-info text-center fs-5">
+            Итоговая стоимость заказа: <strong>{{ total_price }} руб.</strong>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Подтвердить и отправить заказ</button>
+</form>
+
+<script src="/static/js/script.js"></script>
+{% endblock %}

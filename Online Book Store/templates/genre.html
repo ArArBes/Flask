@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="mb-4 d-flex justify-content-around align-items-center border">
+        <h3 class="display-3">{{ genre }}</h3>
+    </div>
+    <div class="row justify-content-center">
+        {% for book in books %}
+
+        <div class="col-md-4 mb-4 d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <a href="{{ url_for('main.book', book_id=book.id) }}" class="card-body">
+                    <img src="{{ url_for('static', filename='img/bookIMG.webp') }}" alt="{{ book.title }} обложка"
+                        class="card-img-top" />
+                    <h2>{{ book.title }}</h2>
+                    <p class="mb-2 text-start"><strong>Автор:</strong> {{ book.author }}</p>
+                    <p class="mb-2 text-start"><strong>Год издания:</strong> {{ book.year }}</p>
+                    <p class="mb-2 text-start"><strong>Цена:</strong> {{ book.price }} руб.</p>
+                    <p class="mb-2 text-start"><strong>Жанр:</strong> {{ book.genre }}</p>
+                    <p class="mb-2 text-start"><strong>Описание:</strong> {{ book.description }}</p>
+                    <p class="mb-2 text-start"><strong>Оценка пользователей:</strong> {{ book.rating }} / 5</p>
+                </a>
+                <div class="d-flex justify-content-center align-items-center m-3 ">
+                    <form method="post" action="{{ url_for('main.cart') }}">
+                        <label for="quantity-select">Выбрать кол-во:</label>
+                        <input type="number" id="quantity-select" name="count" min="1" value="1" />
+                        <input type="hidden" name="genre" value="{{ genre }}">
+                        <input type="hidden" name="book_id" value="{{ book.id }}">
+                        <button type="submit" class="btn btn-primary mt-2">Положить в корзину</button>
+                    </form>
+                </div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                {% if category == 'book_' ~ book.id|string %}
+                <div class="alert alert-success m-3 text-center" role="alert">
+                    {{ message }}
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

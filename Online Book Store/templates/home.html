@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %} Главная {% endblock %}
+
+{% block content %}
+    
+    <main class="col-md-9 bg-white p-4 border border-secondary rounded shadow-sm">
+        <section class="mb-5">
+            <h4 class="text-success mb-3 border-start border-4 border-success ps-3">ТОП 3 продаж недели:</h4>
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item">Название товара 1</li>
+                <li class="list-group-item">Название товара 2</li>
+                <li class="list-group-item">Название товара 3</li>
+            </ol>
+        </section>
+        <section>
+            <h4 class="text-info mb-3 border-bottom border-info pb-2">Разделы каталога:</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item border-0 ps-0">Обложки разделов</li>
+                <li class="list-group-item border-0 ps-0">Названия разделов</li>
+            </ul>
+        </section>
+    </main>
+{% endblock %}

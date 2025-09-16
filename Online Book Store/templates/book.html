@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="book-detail">
+    <div class="book-header">
+        <img src="{{ book.photo_url }}" alt="Фото книги {{ book.title }}" class="book-photo" />
+        <h1 class="book-title">{{ book.title }}</h1>
+        <h2 class="book-author">Автор: {{ book.author }}</h2>
+        <p class="book-year">Год издания: {{ book.year }}</p>
+        <p class="book-rating">
+            Оценка пользователей: {{ book.rating }} / 5
+            ({{ book.reviews_count }} отзывов)
+        </p>
+        <p class="book-binding">Вид переплёта: {{ book.binding }}</p>
+        <p class="book-price">Цена: {{ book.price }} руб.</p>
+        <p class="book-availability">Наличие в магазинах: {{ book.availability }}</p>
+    </div>
+
+    <section class="book-description">
+        <h3>О книге</h3>
+        <p>{{ book.description }}</p>
+    </section>
+
+    <section class="book-additional-info">
+        <h3>Дополнительные характеристики книги:</h3>
+        <ul>
+            <li>Издательство: {{ book.publisher }}</li>
+            <li>Возрастное ограничение: {{ book.age_limit }}</li>
+            <li>Вес: {{ book.weight }} г</li>
+            <li>Формат: {{ book.format }}</li>
+        </ul>
+    </section>
+
+    <form method="post" action="{{ url_for('main.cart') }}">
+        <div class="mb-3" style="max-width: 179px;">
+            <label for="quantity-select" class="form-label">Выбрать кол-во:</label>
+            <input type="number" id="quantity-select" name="count" min="1" value="1" class="form-control" />
+        </div>
+        <input type="hidden" name="genre" value="{{ genre }}">
+        <input type="hidden" name="book_id" value="{{ book.id }}">
+        <button type="submit" class="btn btn-primary">Положить в корзину</button>
+    </form>
+
+    <section class="book-reviews mt-4">
+        <h3 class="mb-3">Отзывы</h3>
+        <ul class="list-unstyled">
+            {% for review in reviews %}
+            <li class="mb-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ review.name }}</h5>
+                        <p class="card-text">{{ review.review }}</p>
+                        <p class="card-text">
+                            <small class="text-muted">Рейтинг: {{ review.rating }} / 5</small>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            {% else %}
+            <li>
+                <div class="alert alert-info" role="alert">
+                    Пока нет отзывов.
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+
+    <section class="write-review">
+        <h3>Написать комментарий</h3>
+        {% if user_auth %}
+        <form method="post" action="{{ url_for('main.review') }}">
+            <div class="card shadow-sm p-3 mb-3" style="width: 500px;">
+                <div class="card-body">
+                    <label for="review-text" class="form-label">Ваш отзыв:</label>
+                    <input type="hidden" name="book_id" value="{{ book.id }}">
+
+                    <label for="rating" class="form-label mt-3">Рейтинг:</label>
+                    <select id="rating" name="rating" class="form-select" aria-label="Рейтинг">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+
+                    <textarea id="review-text" name="review_text" rows="4" class="form-control mt-3"
+                        required></textarea>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Отправить</button>
+        </form>
+        {% else %}
+        <p>Чтобы написать комментарий, необходимо авторизироваться.</p>
+        {% endif %}
+    </section>
+
+</div>
+{% endblock %}

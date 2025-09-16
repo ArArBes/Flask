@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Мои заказы</h2>
+  {% if orders %}
+    <div class="list-group">
+      {% for order in orders %}
+      <div class="list-group-item mb-3">
+        <h5>Заказ №{{ order.id }}</h5>
+        <p><strong>Дата заказа:</strong> {{ order.order_date.strftime('%d.%m.%Y %H:%M') if order.order_date else 'Не указана' }}</p>
+        <p><strong>Статус:</strong> {{ order.order_status }}</p>
+        <p><strong>Адрес доставки:</strong> {{ order.address or 'Не указан' }}</p>
+        <h6>Товары в заказе:</h6>
+        <ul>
+          {% for item in order.order_items %}
+          <li>
+            <a href="{{ url_for('main.book', book_id=item.book_id) }}">
+              {{ item.book.title if item.book else 'Товар удалён' }}
+            </a> -
+            Кол-во: {{ item.count }},
+            Цена за шт: {{ "%.2f"|format(item.price / item.count if item.count else 0) }} руб.,
+            Общая цена: {{ "%.2f"|format(item.price) }} руб.
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>У вас пока нет заказов.</p>
+  {% endif %}
+{% endblock %}

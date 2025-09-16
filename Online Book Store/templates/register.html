@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <title>Registration</title>
+</head>
+
+<body class="bg-light">
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 w-50 mw-30">
+    <h2 class="text-center mb-4">Registration</h2>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="mb-3">{{ form.username.label(class="form-label") }} {{ form.username(class="form-control") }}</div>
+      <div class="mb-3">{{ form.email.label(class="form-label") }} {{ form.email(class="form-control") }}</div>
+      <div class="mb-3">{{ form.phone_number.label(class="form-label") }} {{ form.phone_number(class="form-control") }}
+      </div>
+      <div class="mb-3">{{ form.password.label(class="form-label") }} {{ form.password(class="form-control") }}</div>
+      <div class="mb-3">
+        {{ form.confirm_password.label(class="form-label") }} {{ form.confirm_password(class="form-control") }}
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Register</button>
+    </form>
+    <div class="text-center mt-3">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+</div>
+<p class="text-center">
+  Already have an account? <a href="{{ url_for('main.login') }}">Login</a>
+</p>
+</body>
+
+</html>

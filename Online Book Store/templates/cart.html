@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row mb-3 align-items-center">
+    <div class="col-auto">
+      <input type="checkbox" id="selectAll" class="form-check-input" />
+      <label for="selectAll" class="form-check-label">Выбрать все товары</label>
+    </div>
+    <div class="col text-end">
+      <span>Выбрано товаров: <span id="selectedCount">0</span></span>
+    </div>
+  </div>
+  <form method="POST" action="{{ url_for('main.new_order')}}">
+    <div class="row">
+      {% for book in books %}
+      <div class="col-md-4 mb-4 d-flex justify-content-center">
+        <div class="card" style="width: 18rem;">
+          <a href="{{ url_for('main.book', book_id=book.id) }}" class="card-body text-center">
+            <div class="form-check mb-2 text-start border-bottom border-primary rounded p-2  bg-light shadow-sm">
+              <label class="form-check-label" for="bookCheck{{ book.id }}">Выбрать товар</label>
+              <input class="form-check-input select-book" type="checkbox" name="selected_books" value="{{ book.id }}"
+                id="bookCheck{{ book.id }}" style=" margin-left: 5px; margin-right: 5px">
+            </div>
+            <img src="{{ url_for('static', filename='img/bookIMG.webp') }}" alt="{{ book.title }} обложка"
+              class="card-img-top mb-3" />
+            <h5 class="card-title">{{ book.title }}</h5>
+            <p class="mb-1 text-start"><strong>Автор:</strong> {{ book.author }}</p>
+            <p class="mb-1 text-start"><strong>Год выпуска:</strong> {{ book.year }}</p>
+            <p class="mb-1 text-start"><strong>Цена:</strong> {{ book.price }} руб.</p>
+            <p class="mb-1 text-start"><strong>Кол-во:</strong> {{ book.count }} </p>
+            <a href="/delete/{{ book.id }}" type="button" class="btn btn-danger btn-sm mt-2 delete-book"
+              data-book-id="{{ book.id }}">Удалить
+              товар</a>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="row mt-3">
+      <div class="col text-end">
+        <button class="btn btn-success" id="checkoutBtn" disabled>Перейти к оформлению</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="/static/js/script.js"></script>
+{% endblock %}
